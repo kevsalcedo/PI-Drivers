@@ -24,6 +24,7 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
       allowNull: false,
+      //defaultValue: 
     },
     nationality: {
       type: DataTypes.STRING,

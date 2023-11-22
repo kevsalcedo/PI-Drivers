@@ -6,10 +6,10 @@ const {
 } = require("../controllers/driversController");
 
 const getDriversHandler = async (req, res) => {
-  const { name } = req.query;
+  const { 'name.forename': forename } = req.query;
 
   try {
-    const result = name ? await getDriverByName(name) : await getAllDrivers();
+    const result = forename ? await getDriverByName(forename) : await getAllDrivers();
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -17,12 +17,14 @@ const getDriversHandler = async (req, res) => {
 };
 
 const getDriverByIdHandler = async (req, res) => {
-  const { id } = req.params;
+  const { idDriver } = req.params;
 
-  const source = isNaN(id) ? "bdd" : "api";
+  console.log("id", idDriver)
+
+  const source = isNaN(idDriver) ? "bdd" : "api";
 
   try {
-    const driver = await getDriverById(source, id);
+    const driver = await getDriverById(source, idDriver);
     res.status(200).json(driver);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -43,7 +45,7 @@ const createDriverHandler = async (req, res) => {
       dob
     );
 
-    res.status(200).json(newDriver);
+    res.status(201).json(newDriver);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
