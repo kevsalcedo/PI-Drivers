@@ -45,7 +45,7 @@ const getDriverById = async (source, id) => {
       ? await Driver.findByPk(id)
       : (await axios.get(`http://localhost:5000/drivers/${id}`)).data;
 
-  console.log(source);
+  console.log("source",source);
 
   if (!driver) throw new Error("El driver no existe");
   return driver;
