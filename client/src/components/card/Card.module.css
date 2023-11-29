@@ -1,0 +1,28 @@
+.card{
+    flex: 0 0 calc(29% - 20px);
+    text-align: center;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    cursor: pointer;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility:hidden;
+    transform: translateZ(0);
+    transition: transform 0.25s ease-out;
+}
+
+/* .card:hoover {
+    transform: scale(1.05);
+}   */
+.cardName {
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.cardImg {
+    width: 100%; 
+    height: auto;
+    border-radius: 5px; 
+    margin-top: 10px; 
+}

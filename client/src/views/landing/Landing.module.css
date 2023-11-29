@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Establece la altura de la página al 100% de la ventana gráfica */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('ruta-de-fondo.jpg');
+    background-size: cover;
+  }
+  
+  .loginButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(219, 52, 52); /* Puedes cambiar el color según tus preferencias */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
