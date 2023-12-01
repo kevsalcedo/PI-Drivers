@@ -1,0 +1,41 @@
+/* SearchBar.module.css */
+
+.search-container {
+    text-align: center;
+    margin: 400px;
+    padding: 100px;
+    background-color: blue;
+}
+  
+form {
+    gap: 10px;
+    margin: 10px;
+    align-items: center;
+}
+  
+input {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid rgb(219, 52, 52);
+    transition: border 0.3s; /* Agrega una transición al cambio de borde */
+    border-radius: 10px;
+}
+  
+input:focus {
+    border: 1px solid red; /* Cambia el borde a rojo cuando el input está enfocado */
+}
+  
+button {
+    padding: 1px 0; /* Padding 0 en horizontal, 8px en vertical */
+    cursor: pointer;
+    border: none;
+    background-color: rgb(219, 52, 52);
+    color: #fff;
+    border-radius: 5px;
+}
+  
+button:hover {
+    background-color: #fff;
+    color: rgb(219, 52, 52);
+    border: none;
+}

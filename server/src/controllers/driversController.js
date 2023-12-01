@@ -48,6 +48,7 @@ const getDriverById = async (source, id) => {
   console.log("source",source);
 
   if (!driver) throw new Error("El driver no existe");
+  console.log(driver);
   return driver;
 };
 

@@ -1,38 +1,49 @@
 import CardContainer from "../../components/cardContainer/CardContainer";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getDrivers } from "../../redux/actions/actions";
+import SearchBar from "../../components/searchBar/SearchBar";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDrivers, getTeams } from "../../redux/actions/actions";
 
 const Home = () => {
+  const [aux, setAux] = useState(false);
+
   const dispatch = useDispatch();
+  const teams = useSelector((state) => state.teams);
 
   useEffect(() => {
     dispatch(getDrivers());
+    //dispatch(getTeams());
   }, []);
 
-  /*   const handleOrder = (event) => {
+  const filterByTeam = (event) => {
+    dispatch(filterTeam(event.target.value));
+  };
+
+  const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
     setAux(!aux);
   };
 
-  const handleFilter = (event) => {
-    dispatch(filterCards(event.target.value));
-  }; */
-
   return (
     <>
       <div>
-        <select /* onChange={handleOrder} */>
+        <SearchBar />
+      </div>
+
+      <div>
+        <select name="filterByOrigin" onChange={handleOrder}>
           <option value="A">Ascendente</option>
           <option value="D">Decendente</option>
         </select>
 
-        <select /* onChange={handleFilter} */>
-          <option value="Action">Action</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Sports">Sports</option>
-          <option value="Shooter">Shooter</option>
-        </select>
+        {/* <select name="filterByTeam" onChange={filterByTeam}>
+          {teams &&
+            teams.map((team) => (
+              <option key={team} value={team}>
+                {team}
+              </option>
+            ))}
+        </select> */}
       </div>
 
       <div>

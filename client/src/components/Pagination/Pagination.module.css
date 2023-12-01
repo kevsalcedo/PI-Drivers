@@ -10,11 +10,16 @@
     padding: 10px 15px;
     margin: 0 5px;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333;
+    border: none;
+    background-color: rgb(219, 52, 52);
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
+  }
+
+  .pagination-link:hover {
+    background-color: #fff;
+    color: rgb(219, 52, 52);
   }
   
   .pagination-previous:hover,
@@ -25,13 +30,13 @@
   .is-disabled {
     pointer-events: none;
     cursor: not-allowed;
-    background-color: #ddd;
+    background-color: rgb(105, 26, 26);
     color: #aaa;
   }
   
   .is-current {
-    background-color: #333;
-    color: #fff;
+    background-color: #fff;
+    color: rgb(219, 52, 52);
   }
   
   .pagination-list {
