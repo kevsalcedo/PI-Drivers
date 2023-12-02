@@ -41,11 +41,6 @@ export const Pagination = ({
 
   const visiblePageNumbers = pageNumbers.slice(startPage - 1, endPage);
 
-  /*   console.log("totalDrivers", totalDrivers);
-  console.log("pageNumbers", pageNumbers);
-  console.log("driversPerPage", driversPerPage);
-  console.log("currentPage", currentPage); */
-
   return (
     <nav
       className={styles.pagination}

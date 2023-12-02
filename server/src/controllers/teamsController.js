@@ -60,15 +60,16 @@ const storeTeamsInDB = async (teams) => {
 const getAllTeams = async () => {
   const bddTeams = await Team.findAll();
 
-  let apiTeamsRow = await getAllApiTeams();
+  if (bddTeams.length) return bddTeams;
+  else {
+    let apiTeamsRow = await getAllApiTeams();
 
-  const apiTeams = cleanArray(apiTeamsRow);
+    const apiTeams = cleanArray(apiTeamsRow);
 
-  //console.log("api Teams", apiTeams);
+    await storeTeamsInDB(apiTeams);
 
-  await storeTeamsInDB(apiTeams);
-
-  return [...bddTeams, ...apiTeams];
+    return [...bddTeams, ...apiTeams];
+  }
 };
 
 module.exports = { getAllTeams };

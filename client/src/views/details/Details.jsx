@@ -9,7 +9,8 @@ const Details = () => {
   const { id } = useParams();
 
   const driver = useSelector((state) => state.driver);
-  console.log("driver", driver);
+
+  console.log("Driver id detail", driver)
 
   useEffect(() => {
     dispatch(getDriverDetail(id));
@@ -20,9 +21,11 @@ const Details = () => {
   return (
     <>
       <div className={styles["details-container"]}>
-        <img className="" src={driver.image?.url} alt={driver.name?.forename} />
+        <img className="" src={driver.id === isNaN ? driver.image :driver.image?.url} alt={driver.name?.forename} />
+        <h1>ID#{driver.id}</h1>
         <h1>
-          ID#{driver.id}: {driver.name?.forename} {driver.name?.surname}
+          Name: {driver.id === isNaN ? driver.forename : driver.name?.forename}{" "}
+          {driver.id === isNaN ? driver.surname : driver.name?.surname}
         </h1>
         <h2>Nationality: {driver.nationality}</h2>
         <h3>Date of birth: {driver.dob}</h3>

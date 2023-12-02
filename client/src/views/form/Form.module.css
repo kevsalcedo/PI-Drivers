@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Organiza en 4 columnas */
+    gap: 10px; /* Espacio entre los equipos */
+  }
+  
+  .team {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Estilo para el checkbox seleccionado */
+  .team input:checked {
+    background-color: red;
+  }

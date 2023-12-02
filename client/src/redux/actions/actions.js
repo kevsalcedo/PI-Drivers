@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   GET_DRIVER_DETAIL,
-  GET_DRIVERS,
-  FILTER_BY_TEAM,
+  GET_ALL_DRIVERS,
+  FILTER,
   ORDER,
   SEARCH_DRIVER,
   GET_TEAMS,
@@ -21,7 +21,7 @@ export const getDrivers = () => {
 
       const finalResult = [].concat.apply([], drivers);
 
-      return dispatch({ type: GET_DRIVERS, payload: finalResult });
+      return dispatch({ type: GET_ALL_DRIVERS, payload: finalResult });
     } catch (error) {
       console.log(error);
     }
@@ -73,15 +73,18 @@ export const searchDriver = (driver) => {
 export const getTeams = () => {
   return async (dispatch) => {
     let response = (await axios.get("http://localhost:3001/teams")).data;
-    console.log("response", response);
-
     dispatch({ type: GET_TEAMS, payload: response });
   };
 };
 
 export const filterTeam = (team) => {
   return async (dispatch) => {
-    dispatch({ type: FILTER_BY_TEAM, payload: team });
+    try {
+      dispatch({ type: FILTER_BY_TEAM, payload: team });
+    } catch (error) {
+      alert(error.response.error);
+    }
+    
   };
 };
 
