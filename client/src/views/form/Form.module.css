@@ -13,3 +13,10 @@
   .team input:checked {
     background-color: red;
   }
+
+  .is-disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: rgb(105, 26, 26);
+    color: #aaa;
+  }

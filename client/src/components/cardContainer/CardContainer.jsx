@@ -12,7 +12,6 @@ const CardContainer = () => {
   const totalDrivers = drivers.length;
 
   const allTeams = useSelector((state) => state.allTeams);
-  console.log("All teams", allTeams)
 
   const [driversPerPage, setDriversPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);

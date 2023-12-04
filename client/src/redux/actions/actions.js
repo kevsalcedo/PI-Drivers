@@ -7,7 +7,7 @@ import {
   SEARCH_DRIVER,
   GET_TEAMS,
   RESET,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
 } from "./actions-typer";
 
 export const getDrivers = () => {
@@ -42,8 +42,8 @@ export const getDriverDetail = (id) => {
 };
 
 export const cleanDetail = () => {
-  return {type: CLEAN_DETAIL}
-}
+  return { type: CLEAN_DETAIL };
+};
 
 export const filterCards = (team) => {
   return { type: FILTER, payload: team };
@@ -84,12 +84,22 @@ export const filterTeam = (team) => {
     } catch (error) {
       alert(error.response.error);
     }
-    
   };
 };
 
 export const restart = () => {
   return async (dispatch) => {
     dispatch({ type: RESET });
+  };
+};
+
+export const postDriver = (newDriver) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`http://localhost:3001/drivers`, newDriver);
+      console.log("driver successfully created");
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

@@ -14,6 +14,7 @@ const Card = (props) => {
           src={props?.image}
           alt={props.forename}
         />
+        <h2 className={style.cardName}>Teams:</h2>
       </div>
     </Link>
   );
