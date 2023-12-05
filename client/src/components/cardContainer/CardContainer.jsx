@@ -47,8 +47,8 @@ const CardContainer = () => {
           <option value="bdd">drivers created</option>
           <option value="api">API drivers</option>
           {allTeams.map((team) => (
-            <option key={team.id} value={team.name}>
-              {team.name}
+            <option key={team.id} value={team.teamName}>
+              {team.teamName}
             </option>
           ))}
         </select>
@@ -67,6 +67,7 @@ const CardContainer = () => {
                 nationality={driver.nationality}
                 dob={driver.dob}
                 description={driver.description}
+                teams={driver.teams}
               />
             );
           })

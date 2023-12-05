@@ -14,7 +14,8 @@ const Card = (props) => {
           src={props?.image}
           alt={props.forename}
         />
-        <h2 className={style.cardName}>Teams:</h2>
+        <h3 className={style.cardName}>Teams:</h3>
+        <h4>{props.teams}</h4>
       </div>
     </Link>
   );

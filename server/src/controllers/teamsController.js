@@ -16,7 +16,7 @@ const cleanArray = (arr) => {
   const clean = arr.map((elem) => {
     return {
       id: elem?.id,
-      teams: elem?.teams,
+      teamName: elem?.teams,
       created: false,
     };
   });
@@ -29,8 +29,8 @@ const storeTeamsInDB = async (teams) => {
     const uniqueTeams = [
       ...new Set(
         teams.flatMap((team) =>
-          team.teams
-            ? team.teams.split(",").map((teamName) => teamName.trim()) // Elimina espacios al principio y al final de cada nombre
+          team.teamName
+            ? team.teamName.split(",").map((name) => name.trim()) // Elimina espacios al principio y al final de cada nombre
             : []
         )
       ),
@@ -38,9 +38,9 @@ const storeTeamsInDB = async (teams) => {
 
     if (uniqueTeams.length > 0) {
       await Team.bulkCreate(
-        uniqueTeams.map((teamName) => ({ name: teamName })),
+        uniqueTeams.map((teamName) => ({ teamName: teamName })),
         {
-          updateOnDuplicate: ["name"],
+          updateOnDuplicate: ["teamName"],
         }
       );
       console.log("Equipos almacenados en la base de datos con éxito.");

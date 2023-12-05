@@ -9,8 +9,8 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
-        type: DataTypes.STRING,
+      teamName: {
+        type: DataTypes.STRING /* ARRAY(DataTypes.STRING) */,
         allowNull: false,
       },
     },

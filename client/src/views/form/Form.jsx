@@ -4,20 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../form/Form.module.css";
 import { getTeams, postDriver } from "../../redux/actions/actions";
 import Validation from "./Validation";
+import { all } from "axios";
 
 const Form = () => {
   const dispatch = useDispatch();
 
   const allTeams = useSelector((state) => state.allTeams);
+  //console.log("All teams", allTeams)
 
   const [newDriver, setNewDriver] = useState({
     forename: "",
     surname: "",
-    description: "",
+    description: "", 
     image: "",
     nationality: "",
     dob: "",
-    teams: [],
+    teamName: "",
   });
 
   useEffect(() => {
@@ -27,11 +29,11 @@ const Form = () => {
       newDriver.surname !== "" ||
       newDriver.nationality ||
       newDriver.dob !== "" ||
-      newDriver.teams !== ""
+      newDriver.teamName !== ""
     ) {
       const newDriverValidation = Validation(newDriver);
       setErrors(newDriverValidation);
-    }
+    } 
   }, [newDriver]);
 
   const handleChange = (event) => {
@@ -64,7 +66,7 @@ const Form = () => {
     image: "",
     nationality: "",
     dob: "",
-    teams: "",
+    teamName: "",
   });
 
 
@@ -182,10 +184,10 @@ const Form = () => {
         <div className={styles.container}>
           {allTeams.map((team) => (
             <div className={styles.team} key={team.id}>
-              <label>{team.name}: </label>
+              <label>{team.teamName}: </label>
               <input
-                id="teams"
-                name="teams"
+                id="teamName"
+                name="teamName"
                 type="checkbox"
                 value={team.name}
               />
