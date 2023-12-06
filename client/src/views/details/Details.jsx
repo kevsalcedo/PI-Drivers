@@ -32,7 +32,7 @@ const Details = () => {
         <h2>Nationality: {driver.nationality}</h2>
         <h3>Date of birth: {driver.dob}</h3>
         <p>{driver.description}</p>
-        <h2>Teams: {isNaN(driver.id) ? driver.teams : (driver.Teams.map((team)=>team.teamName).join(", "))}</h2>
+        <h2>Teams:{driver.teams}</h2>
       </div>
     </>
   );

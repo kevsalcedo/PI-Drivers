@@ -29,7 +29,7 @@ export const Pagination = ({
     setCurrentPage(n);
   };
 
-  const maxDisplayedPages = 5; // Ajusta según la cantidad de páginas que deseas mostrar
+  const maxDisplayedPages = 5;
   const halfMaxDisplayedPages = Math.floor(maxDisplayedPages / 2);
 
   let startPage = Math.max(1, currentPage - halfMaxDisplayedPages);

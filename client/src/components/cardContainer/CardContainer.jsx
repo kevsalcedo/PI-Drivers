@@ -10,7 +10,6 @@ const CardContainer = () => {
   const dispatch = useDispatch();
   const drivers = useSelector((state) => state.drivers);
   const totalDrivers = drivers.length;
-  //console.log("All drivers", drivers)
 
   const allTeams = useSelector((state) => state.allTeams);
 

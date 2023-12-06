@@ -10,7 +10,6 @@ const driverValidate = (req, res, next) => {
   if (!surname)
     return res.status(400).json({ error: "Missing surname" });
   if (!description) return res.status(400).json({ error: "Missing description" });
-  if (!image) return res.status(400).json({ error: "Missing image" });
   if (!nationality) return res.status(400).json({ error: "Missing nationality" });
   if (!dob) return res.status(400).json({ error: "Missing dob" });
 

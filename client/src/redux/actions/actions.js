@@ -59,7 +59,6 @@ export const searchDriver = (driver) => {
       let response = (
         await axios.get(`http://localhost:3001/drivers?name.forename=${driver}`)
       ).data;
-      /* AQUI FALTA EL MENSAJE CUANDO NO SE ENCUENTRA NINGUN DRIVER */
       dispatch({
         type: SEARCH_DRIVER,
         payload: response,

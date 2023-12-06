@@ -25,12 +25,11 @@ const cleanArray = (arr) => {
 
 const storeTeamsInDB = async (teams) => {
   try {
-    // Filtra los equipos que tienen un nombre no nulo y obtiene equipos únicos
     const uniqueTeams = [
       ...new Set(
         teams.flatMap((team) =>
           team.teamName
-            ? team.teamName.split(",").map((name) => name.trim()) // Elimina espacios al principio y al final de cada nombre
+            ? team.teamName.split(",").map((name) => name.trim())
             : []
         )
       ),

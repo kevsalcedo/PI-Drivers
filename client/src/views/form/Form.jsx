@@ -25,8 +25,7 @@ const Form = () => {
       newDriver.forename !== "" ||
       newDriver.surname !== "" ||
       newDriver.nationality ||
-      newDriver.dob !== "" ||
-      newDriver.teamName !== ""
+      newDriver.dob !== "" 
     ) {
       const newDriverValidation = Validation(newDriver);
       setErrors(newDriverValidation);

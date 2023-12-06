@@ -3,7 +3,6 @@ const {
   getDriverByName,
   getDriverById,
   createDriver,
-  createOrFindTeam,
 } = require("../controllers/driversController");
 
 const getDriversHandler = async (req, res) => {
@@ -21,9 +20,7 @@ const getDriversHandler = async (req, res) => {
 
 const getDriverByIdHandler = async (req, res) => {
   const { idDriver } = req.params;
-
-  console.log("id", idDriver);
-
+  
   const source = isNaN(idDriver) ? "bdd" : "api";
 
   try {
@@ -48,12 +45,6 @@ const createDriverHandler = async (req, res) => {
       dob,
       teamName
     );
-
-    /* const teamInstances = await Promise.all(
-      teamName.map((teamName) => createOrFindTeam(teamName))
-    );
-
-    await newDriver.setTeams(teamInstances); */
 
     res.status(201).json(newDriver);
   } catch (error) {

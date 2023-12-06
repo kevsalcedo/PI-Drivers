@@ -99,7 +99,6 @@ const getDriverById = async (source, id) => {
       : (await axios.get(`http://localhost:5000/drivers/${id}`)).data;
 
   if (!driver) throw new Error("El driver no existe");
-  console.log(driver);
   return driver;
 };
 

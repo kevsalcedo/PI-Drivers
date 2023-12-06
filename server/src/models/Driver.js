@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
       allowNull: true,
-      //defaultValue: 
+      defaultValue: "https://areajugones.sport.es/wp-content/uploads/2017/08/mario_kart_8_deluxe-wide.jpg"
     },
     nationality: {
       type: DataTypes.STRING,

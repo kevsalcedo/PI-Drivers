@@ -41,11 +41,6 @@ const Validation = (newDriver) => {
     errors.dob = "required information";
   }
 
-  // TEAMS
-  /* if (newDriver.teams === "") {
-    errors.teams = "required information";
-  } */
-
   return errors;
 };
 
