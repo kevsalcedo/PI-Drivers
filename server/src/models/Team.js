@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       teamName: {
-        type: DataTypes.STRING /* ARRAY(DataTypes.STRING) */,
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

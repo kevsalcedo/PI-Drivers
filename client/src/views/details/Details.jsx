@@ -10,8 +10,6 @@ const Details = () => {
 
   const driver = useSelector((state) => state.driver);
 
-  console.log("Driver id detail", driver)
-
   useEffect(() => {
     dispatch(getDriverDetail(id));
 
@@ -21,16 +19,20 @@ const Details = () => {
   return (
     <>
       <div className={styles["details-container"]}>
-        <img className="" src={driver.id === isNaN ? driver.image :driver.image?.url} alt={driver.name?.forename} />
+        <img
+          className=""
+          src={isNaN(driver.id) ? driver.image : driver.image?.url}
+          alt={driver.name?.forename}
+        />
         <h1>ID#{driver.id}</h1>
         <h1>
-          Name: {driver.id === isNaN ? driver.forename : driver.name?.forename}{" "}
-          {driver.id === isNaN ? driver.surname : driver.name?.surname}
+          Name: {isNaN(driver.id) ? driver.forename : driver.name?.forename}{" "}
+          {isNaN(driver.id) ? driver.surname : driver.name?.surname}
         </h1>
         <h2>Nationality: {driver.nationality}</h2>
         <h3>Date of birth: {driver.dob}</h3>
         <p>{driver.description}</p>
-        <h2>Teams: {driver.teams}</h2>
+        <h2>Teams: {isNaN(driver.id) ? driver.teams : (driver.Teams.map((team)=>team.teamName).join(", "))}</h2>
       </div>
     </>
   );

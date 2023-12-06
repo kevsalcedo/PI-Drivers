@@ -3,13 +3,16 @@ const {
   getDriverByName,
   getDriverById,
   createDriver,
+  createOrFindTeam,
 } = require("../controllers/driversController");
 
 const getDriversHandler = async (req, res) => {
-  const { 'name.forename': forename } = req.query;
+  const { "name.forename": forename } = req.query;
 
   try {
-    const result = forename ? await getDriverByName(forename) : await getAllDrivers();
+    const result = forename
+      ? await getDriverByName(forename)
+      : await getAllDrivers();
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -19,7 +22,7 @@ const getDriversHandler = async (req, res) => {
 const getDriverByIdHandler = async (req, res) => {
   const { idDriver } = req.params;
 
-  console.log("id", idDriver)
+  console.log("id", idDriver);
 
   const source = isNaN(idDriver) ? "bdd" : "api";
 
@@ -33,7 +36,7 @@ const getDriverByIdHandler = async (req, res) => {
 
 const createDriverHandler = async (req, res) => {
   try {
-    const { forename, surname, description, image, nationality, dob } =
+    const { forename, surname, description, image, nationality, dob, teamName } =
       req.body;
 
     const newDriver = await createDriver(
@@ -42,8 +45,15 @@ const createDriverHandler = async (req, res) => {
       description,
       image,
       nationality,
-      dob
+      dob,
+      teamName
     );
+
+    /* const teamInstances = await Promise.all(
+      teamName.map((teamName) => createOrFindTeam(teamName))
+    );
+
+    await newDriver.setTeams(teamInstances); */
 
     res.status(201).json(newDriver);
   } catch (error) {

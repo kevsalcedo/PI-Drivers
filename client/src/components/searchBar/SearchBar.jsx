@@ -17,7 +17,7 @@ export default function SearchBar({ onSearch }) {
   };
 
   const reset = (event) => {
-    dispatch(restart(input));
+    dispatch(restart());
   };
 
   return (

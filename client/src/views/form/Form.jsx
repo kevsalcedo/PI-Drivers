@@ -4,26 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../form/Form.module.css";
 import { getTeams, postDriver } from "../../redux/actions/actions";
 import Validation from "./Validation";
-import { all } from "axios";
 
 const Form = () => {
   const dispatch = useDispatch();
 
   const allTeams = useSelector((state) => state.allTeams);
-  //console.log("All teams", allTeams)
 
   const [newDriver, setNewDriver] = useState({
     forename: "",
     surname: "",
-    description: "", 
+    description: "",
     image: "",
     nationality: "",
     dob: "",
-    teamName: "",
+    teamName: [],
   });
 
   useEffect(() => {
-    dispatch(getTeams());
     if (
       newDriver.forename !== "" ||
       newDriver.surname !== "" ||
@@ -33,14 +30,15 @@ const Form = () => {
     ) {
       const newDriverValidation = Validation(newDriver);
       setErrors(newDriverValidation);
-    } 
+    }
+    dispatch(getTeams());
   }, [newDriver]);
 
   const handleChange = (event) => {
-    if (event.target.value === "teams") {
+    if (event.target.name === "teamName") {
       setNewDriver({
         ...newDriver,
-        [event.target.name]: [...state.teams, event.target.value],
+        [event.target.name]: [...newDriver.teamName, event.target.value],
       });
     } else {
       setNewDriver({
@@ -69,25 +67,22 @@ const Form = () => {
     teamName: "",
   });
 
-
 /*   const disableButton = () => {
     let aux = true;
 
-    for(let error in errors){
-      if(errors[error] === ""){
+    for (let error in errors) {
+      if (errors[error] === "") {
         aux = false;
-      }else{
+        console.log("ABLE BUTT")
+      } else {
         aux = true;
+        console.log("Disable but")
         break;
       }
     }
 
     return aux;
-  } */
-
-  const showErrors = () => {
-    console.log(errors)
-  }
+  }; */
 
   return (
     <>
@@ -189,7 +184,8 @@ const Form = () => {
                 id="teamName"
                 name="teamName"
                 type="checkbox"
-                value={team.name}
+                value={team.teamName}
+                onChange={handleChange}
               />
             </div>
           ))}
@@ -197,7 +193,9 @@ const Form = () => {
 
         <br />
 
-        <button onClick={showErrors} /* disabled={disableButton()} */ type="submit">Create new driver</button>
+        <button /* disabled={disableButton()} */ type="submit">
+          Create new driver
+        </button>
       </form>
     </>
   );

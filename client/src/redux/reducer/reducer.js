@@ -17,6 +17,7 @@ let initialState = {
   allTeams: [],
   allDriversBackup: [],
   driversFiltered: [],
+  driversOrdered: [],
 };
 
 //function reducer
@@ -27,6 +28,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         drivers: action.payload,
         allDriversBackup: action.payload,
+        driversFiltered: action.payload,
+        driversOrdered: action.payload,
       };
     case SEARCH_DRIVER:
       return {
@@ -41,13 +44,13 @@ const reducer = (state = initialState, action) => {
     case ORDER:
       switch (action.payload) {
         case "none":
-          const idOrder = [...state.drivers].sort((a, b) => a.id - b.id);
+          const idOrder = [...state.driversOrdered].sort((a, b) => a.id - b.id);
           return {
             ...state,
             drivers: idOrder,
           };
         case "ascendant":
-          const ascendantOrder = [...state.drivers].sort((a, b) =>
+          const ascendantOrder = [...state.driversOrdered].sort((a, b) =>
             a.surname.localeCompare(b.surname)
           );
           return {
@@ -55,7 +58,7 @@ const reducer = (state = initialState, action) => {
             drivers: ascendantOrder,
           };
         case "decendent":
-          const decendentOrder = [...state.drivers].sort((a, b) =>
+          const decendentOrder = [...state.driversOrdered].sort((a, b) =>
             b.surname.localeCompare(a.surname)
           );
           return {
@@ -63,7 +66,7 @@ const reducer = (state = initialState, action) => {
             drivers: decendentOrder,
           };
         case "younger":
-          const youngerOrder = [...state.drivers].sort(
+          const youngerOrder = [...state.driversOrdered].sort(
             (a, b) => new Date(b.dob) - new Date(a.dob)
           );
           return {
@@ -71,7 +74,7 @@ const reducer = (state = initialState, action) => {
             drivers: youngerOrder,
           };
         case "older":
-          const olderOrder = [...state.drivers].sort(
+          const olderOrder = [...state.driversOrdered].sort(
             (a, b) => new Date(a.dob) - new Date(b.dob)
           );
           return {
@@ -89,24 +92,28 @@ const reducer = (state = initialState, action) => {
         case "bdd":
           return {
             ...state,
-            drivers: state.allDriversBackup.filter((driver) => driver.created),
+            drivers: state.driversFiltered.filter((driver) => driver.created),
           };
         case "api":
           return {
             ...state,
-            drivers: state.allDriversBackup.filter((driver) => !driver.created),
+            drivers: state.driversFiltered.filter((driver) => !driver.created),
+          };
+        default:
+          return {
+            ...state,
+            drivers: state.driversFiltered.filter((driver) => {
+              const driverTeams = driver.teams
+                ? driver.teams.split(",").map((team) => team.trim())
+                : [];
+              return driverTeams.includes(action.payload);
+            }),
           };
       }
-      return {
-        ...state,
-        drivers: [...state.drivers].filter((driver) =>
-          driver.allTeams.includes(action.payload)
-        ),
-      };
     case RESET:
       return {
         ...state,
-        drivers: state.drivers,
+        drivers: state.allDriversBackup,
       };
     case GET_DRIVER_DETAIL:
       return {

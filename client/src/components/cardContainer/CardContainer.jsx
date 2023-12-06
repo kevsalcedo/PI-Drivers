@@ -10,6 +10,7 @@ const CardContainer = () => {
   const dispatch = useDispatch();
   const drivers = useSelector((state) => state.drivers);
   const totalDrivers = drivers.length;
+  //console.log("All drivers", drivers)
 
   const allTeams = useSelector((state) => state.allTeams);
 
@@ -21,10 +22,12 @@ const CardContainer = () => {
 
   const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
+    setCurrentPage(1);
   };
 
   const filterByTeam = (event) => {
-    dispatch( filterCards(event.target.value));
+    dispatch(filterCards(event.target.value));
+    setCurrentPage(1);
   };
 
   return (

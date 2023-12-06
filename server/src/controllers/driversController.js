@@ -1,5 +1,5 @@
-const { Driver } = require("../db");
-const Sequelize = require('sequelize');
+const { Driver, Team } = require("../db");
+const Sequelize = require("sequelize");
 const axios = require("axios");
 
 const getAllApiDrivers = async () => {
@@ -30,8 +30,60 @@ const cleanArray = (arr) => {
   return clean;
 };
 
+const getBddDrivers = async () => {
+  const bddDrivers = await Driver.findAll({
+    include: {
+      model: Team,
+      attributes: ["teamName"],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+
+  const driversMap = bddDrivers.map((driver) => {
+    return {
+      id: driver.id,
+      forename: driver.forename,
+      surname: driver.surname,
+      description: driver.description,
+      image: driver.image,
+      nationality: driver.nationality,
+      dob: driver.dob,
+      teams: driver.Teams.map((team) => team.teamName).join(", "),
+      created: true,
+    };
+  });
+
+  return driversMap;
+};
+
+const getBddDriverById = async (id) => {
+  const bddDriver = await Driver.findByPk(id, {
+    include: [
+      {
+        model: Team,
+        attributes: ["teamName"],
+        through: { attributes: [] },
+      },
+    ],
+  });
+
+  return {
+    id: bddDriver.id,
+    forename: bddDriver.forename,
+    surname: bddDriver.surname,
+    description: bddDriver.description,
+    image: bddDriver.image,
+    nationality: bddDriver.nationality,
+    dob: bddDriver.dob,
+    teams: bddDriver.Teams.map((team) => team.teamName).join(", "),
+    created: true,
+  };
+};
+
 const getAllDrivers = async () => {
-  const bddDrivers = await Driver.findAll();
+  const bddDrivers = await getBddDrivers();
 
   let apiDriversRow = await getAllApiDrivers();
 
@@ -43,7 +95,7 @@ const getAllDrivers = async () => {
 const getDriverById = async (source, id) => {
   const driver =
     source === "bdd"
-      ? await Driver.findByPk(id)
+      ? getBddDriverById(id)
       : (await axios.get(`http://localhost:5000/drivers/${id}`)).data;
 
   if (!driver) throw new Error("El driver no existe");
@@ -82,16 +134,24 @@ const createDriver = async (
   description,
   image,
   nationality,
-  dob
+  dob,
+  teamName
 ) => {
-  return await Driver.create({
+  const newDriver = await Driver.create({
     forename,
-      surname,
-      description,
-      image,
-      nationality,
-      dob
-  })
+    surname,
+    description,
+    image,
+    nationality,
+    dob,
+  });
+
+  teamName.forEach(async (t) => {
+    let teamsDB = await Team.findAll({ where: { teamName: t } });
+    await newDriver.addTeams(teamsDB);
+  });
+
+  return newDriver;
 };
 
 module.exports = {
